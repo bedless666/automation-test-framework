@@ -27,14 +27,15 @@ dependencies {
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/api/cucumber.json, html:build/reports/api/cucumber.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/tests/test/cucumber-api.html"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/web-ui/cucumber.json, html:build/reports/web-ui/cucumber.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/tests/test/cucumber-web.html"
 }
+
 
 // Konfigurasi default untuk semua pengujian
 tasks.withType(Test).configureEach {

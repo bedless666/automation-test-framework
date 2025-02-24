@@ -50,3 +50,7 @@ jobs:
           name: api-test-report
           path: build/reports/api/cucumber.html
           if-no-files-found: warn
+
+      - name: List files in build/reports
+        run: ls -R build/reports
+
