@@ -7,7 +7,6 @@ on:
   pull_request:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   test:
@@ -29,13 +28,13 @@ jobs:
       - name: Grant execute permission for Gradle
         run: chmod +x gradlew
 
-      - name: Run UI Web Tests
-        run: ./gradlew testWeb
+      - name: Run Web UI Tests
+        run: ./gradlew testWeb --info
 
       - name: Run API Tests
-        run: ./gradlew testApi
+        run: ./gradlew testApi --info
 
-      - name: Pastikan Report Ada
+      - name: Debug - Cek struktur direktori
         run: ls -R build/reports || true
 
       - name: Upload Web UI Test Report
@@ -43,9 +42,11 @@ jobs:
         with:
           name: web-ui-test-report
           path: build/reports/web-ui/cucumber.html
+          if-no-files-found: warn
 
       - name: Upload API Test Report
         uses: actions/upload-artifact@v4
         with:
           name: api-test-report
           path: build/reports/api/cucumber.html
+          if-no-files-found: warn
