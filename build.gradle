@@ -27,13 +27,13 @@ dependencies {
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/tests/test/cucumber-api.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/cucumber-api.html"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/tests/test/cucumber-web.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/cucumber-web.html"
 }
 
 
