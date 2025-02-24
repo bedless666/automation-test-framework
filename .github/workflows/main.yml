@@ -34,7 +34,7 @@ jobs:
       - name: Run API Tests
         run: ./gradlew testApi --info
 
-      - name: Debug - Cek struktur direktori
+      - name: Debug - Directory Structure Check
         run: ls -R build/reports || true
 
       - name: Upload Web UI Test Report

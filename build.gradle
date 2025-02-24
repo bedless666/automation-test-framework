@@ -23,23 +23,20 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 }
 
-
-// Gradle tasks untuk cucumber tag
+// Gradle tasks untuk menjalankan pengujian berdasarkan tag Cucumber
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/api/cucumber.json, html:build/reports/api/cucumber.html"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/web-ui/cucumber.json, html:build/reports/web-ui/cucumber.html"
 }
 
-tasks.withType(Test) {
-    reports {
-        html.required = true
-        junitXml.required = true
-    }
+// Konfigurasi default untuk semua pengujian
+tasks.withType(Test).configureEach {
+    systemProperty "cucumber.publish.enabled", "true"
 }
-
-
