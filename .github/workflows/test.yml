@@ -1,7 +1,13 @@
-name: Run API and UI Web Tests
+name: Run Automated Tests
 
 on:
-  workflow_dispatch: # Manual trigger
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
 
 jobs:
   test:
@@ -29,14 +35,17 @@ jobs:
       - name: Run API Tests
         run: ./gradlew testApi
 
-      - name: Upload UI Web Test Report
+      - name: Pastikan Report Ada
+        run: ls -R build/reports || true
+
+      - name: Upload Web UI Test Report
         uses: actions/upload-artifact@v4
         with:
-          name: ui-web-test-report
-          path: build/reports/cucumber.html
+          name: web-ui-test-report
+          path: build/reports/web-ui/cucumber.html
 
       - name: Upload API Test Report
         uses: actions/upload-artifact@v4
         with:
           name: api-test-report
-          path: target/cucumber-reports/
+          path: build/reports/api/cucumber.html

@@ -24,5 +24,10 @@ public class GetUserSteps {
     @Then("The response should contain user details")
     public void validateResponse() {
         response.then().statusCode(200).body("id", notNullValue());
+
+        // Cetak response body ke console untuk debugging
+        System.out.println("Response Body:");
+        System.out.println(response.prettyPrint());
     }
+
 }

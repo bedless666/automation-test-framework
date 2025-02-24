@@ -9,6 +9,9 @@ public class LoginSteps {
 
     @Given("User is on the login page")
     public void userIsOnLoginPage() {
+        // Set path ke ChromeDriver (pastikan path ini sesuai dengan lokasi file di komputermu)
+        System.setProperty("webdriver.chrome.driver", "D:\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+
         driver = new ChromeDriver();
         driver.get("https://www.demoblaze.com/");
     }
