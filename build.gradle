@@ -30,13 +30,13 @@ dependencies {
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/tests/testApi/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/tests/testApi/cucumber.json, html:build/reports/tests/testApi/index.html"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/tests/testWeb/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/tests/testWeb/cucumber.json, html:build/reports/tests/testWeb/index.html"
 }
 
 // Konfigurasi Allure
