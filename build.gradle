@@ -45,6 +45,8 @@ tasks.withType(Test).configureEach {
 }
 
 // Task untuk mengenerate laporan Allure
-tasks.register('allureReport', Exec) {
-    commandLine 'allure', 'generate', 'build/allure-results', '-o', 'build/reports/allure-report', '--clean'
+if (!tasks.names.contains('allureReport')) {
+    tasks.register('allureReport', Exec) {
+        commandLine 'allure', 'generate', 'build/allure-results', '-o', 'build/reports/allure-report', '--clean'
+    }
 }
