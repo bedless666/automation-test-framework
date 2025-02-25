@@ -11,9 +11,9 @@ import org.junit.runner.RunWith;
         plugin = {
                 "pretty",
                 "html:build/reports/tests/test/index.html", // HTML Report
-                "json:build/cucumber-reports/cucumber.json"  // JSON Report
+                "json:build/reports/tests/test/cucumber.json"  // JSON Report
         },
-        tags = "@api or @web"
+        tags = "@api or @web" // Menjalankan API & Web bersamaan
 )
 public class TestRunner {
 }
