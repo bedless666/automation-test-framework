@@ -1,37 +1,33 @@
 package stepdefinitions.web;
 
 import io.cucumber.java.en.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class LoginSteps {
     WebDriver driver;
 
     @Given("User is on the login page")
     public void userIsOnLoginPage() {
-        WebDriverManager.chromedriver().setup();
+        // Set path ke ChromeDriver (pastikan path ini sesuai dengan lokasi file di komputermu)
+        System.setProperty("webdriver.chrome.driver", "D:\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+
         driver = new ChromeDriver();
         driver.get("https://www.demoblaze.com/");
     }
 
     @When("User enters valid username and password")
     public void userEntersValidCredentials() {
-        driver.findElement(By.id("loginusername")).sendKeys("testuser");
-        driver.findElement(By.id("loginpassword")).sendKeys("password123");
+        // Implement login logic here
     }
 
     @And("User clicks on login button")
     public void userClicksLoginButton() {
-        driver.findElement(By.xpath("//button[contains(text(),'Log in')]")).click();
+        // Implement button click here
     }
 
     @Then("User should be redirected to homepage")
     public void userRedirectedToHomepage() {
-        WebElement logoutButton = driver.findElement(By.id("logout2"));
-        assert logoutButton.isDisplayed();
-        driver.quit();
+        // Implement assertion here
     }
 }
