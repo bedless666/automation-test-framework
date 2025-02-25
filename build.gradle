@@ -14,6 +14,7 @@ dependencies {
 
     // Selenium
     testImplementation 'org.seleniumhq.selenium:selenium-java:4.7.2'
+    testImplementation 'io.github.bonigarcia:webdrivermanager:5.3.2' // Untuk ChromeDriver otomatis
 
     // Rest Assured
     testImplementation 'io.rest-assured:rest-assured:5.3.0'
@@ -21,22 +22,24 @@ dependencies {
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    // Allure Report
+    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.21.0'
 }
 
-// Gradle tasks untuk menjalankan pengujian berdasarkan tag Cucumber
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/tests/testApi/cucumber.json, html:build/reports/tests/testApi/index.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/tests/testApi/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/tests/testWeb/cucumber.json, html:build/reports/tests/testWeb/index.html"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/tests/testWeb/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
 }
 
-// Konfigurasi default untuk semua pengujian
-tasks.withType(Test).configureEach {
-    systemProperty "cucumber.publish.enabled", "true"
+// Konfigurasi Allure
+allure {
+    reportDir.set(file("build/reports/allure-results"))
 }

@@ -28,17 +28,14 @@ jobs:
       - name: Grant execute permission for Gradle
         run: chmod +x gradlew
 
-      - name: Debug - List Available API Test Cases
-        run: ./gradlew testApi --dry-run
-
-      - name: Debug - List Available Web UI Test Cases
-        run: ./gradlew testWeb --dry-run
-
       - name: Run Web UI Tests
         run: ./gradlew testWeb --info --no-daemon
 
       - name: Run API Tests
         run: ./gradlew testApi --info --no-daemon
+
+      - name: Generate Allure Report
+        run: ./gradlew allureReport
 
       - name: Debug - Directory Structure Check
         run: ls -R build/reports || true
@@ -47,16 +44,19 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web-ui-test-report
-          path: build/reports/tests/testWeb/index.html
+          path: build/reports/tests/testWeb/
           if-no-files-found: warn
 
       - name: Upload API Test Report
         uses: actions/upload-artifact@v4
         with:
           name: api-test-report
-          path: build/reports/tests/testApi/index.html
+          path: build/reports/tests/testApi/
           if-no-files-found: warn
 
-      - name: List files in build/reports
-        run: ls -R build/reports
-
+      - name: Upload Allure Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: allure-report
+          path: build/reports/allure-results/
+          if-no-files-found: warn
