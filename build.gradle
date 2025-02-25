@@ -30,23 +30,31 @@ dependencies {
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/api/cucumber.json, html:build/reports/api/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/cucumber-api.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/web-ui/cucumber.json, html:build/reports/web-ui/index.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/cucumber-web.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+}
+
+// Konfigurasi Allure
+allure {
+    report {
+        version.set("2.21.0")
+    }
+    adapter {
+        aspectjWeaver.set(true)
+        frameworks {
+            cucumber7 {
+                enabled.set(true)
+            }
+        }
+    }
 }
 
 // Konfigurasi default untuk semua pengujian
 tasks.withType(Test).configureEach {
     systemProperty "cucumber.publish.enabled", "true"
-}
-
-// Task untuk mengenerate laporan Allure
-if (!tasks.names.contains('allureReport')) {
-    tasks.register('allureReport', Exec) {
-        commandLine 'allure', 'generate', 'build/allure-results', '-o', 'build/reports/allure-report', '--clean'
-    }
 }

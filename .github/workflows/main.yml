@@ -44,14 +44,14 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web-ui-test-report
-          path: build/reports/web-ui/index.html
+          path: build/reports/cucumber-web.html
           if-no-files-found: warn
 
       - name: Upload API Test Report
         uses: actions/upload-artifact@v4
         with:
           name: api-test-report
-          path: build/reports/api/index.html
+          path: build/reports/cucumber-api.html
           if-no-files-found: warn
 
       - name: Upload Allure Report
@@ -60,3 +60,6 @@ jobs:
           name: allure-report
           path: build/reports/allure-report
           if-no-files-found: warn
+
+      - name: List files in build/reports
+        run: ls -R build/reports
