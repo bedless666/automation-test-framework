@@ -21,38 +21,21 @@ dependencies {
     // JUnit
     testImplementation 'org.junit.jupiter:junit-jupiter:5.9.2'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
-
-    // Allure Cucumber Adapter
-    testImplementation 'io.qameta.allure:allure-cucumber7-jvm:2.21.0'
 }
 
 // Gradle tasks untuk menjalankan pengujian berdasarkan tag Cucumber
 tasks.register('testApi', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@api"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/cucumber-api.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-api.json, html:build/reports/cucumber-api.html"
 }
 
 tasks.register('testWeb', Test) {
     useJUnitPlatform()
     systemProperty "cucumber.filter.tags", "@web"
-    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/cucumber-web.html, io.qameta.allure.cucumber7jvm.AllureCucumber7Jvm"
+    systemProperty "cucumber.plugin", "pretty, json:build/reports/cucumber-web.json, html:build/reports/cucumber-web.html"
 }
 
-// Konfigurasi Allure
-allure {
-    report {
-        version.set("2.21.0")
-    }
-    adapter {
-        aspectjWeaver.set(true)
-        frameworks {
-            cucumber7 {
-                enabled.set(true)
-            }
-        }
-    }
-}
 
 // Konfigurasi default untuk semua pengujian
 tasks.withType(Test).configureEach {

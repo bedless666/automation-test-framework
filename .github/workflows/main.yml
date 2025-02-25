@@ -34,9 +34,6 @@ jobs:
       - name: Run API Tests
         run: ./gradlew testApi --info --no-daemon
 
-      - name: Generate Allure Report
-        run: ./gradlew allureReport
-
       - name: Debug - Directory Structure Check
         run: ls -R build/reports || true
 
@@ -44,22 +41,16 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: web-ui-test-report
-          path: build/reports/cucumber-web.html
+          path: build/reports/tests/testWeb/index.html
           if-no-files-found: warn
 
       - name: Upload API Test Report
         uses: actions/upload-artifact@v4
         with:
           name: api-test-report
-          path: build/reports/cucumber-api.html
-          if-no-files-found: warn
-
-      - name: Upload Allure Report
-        uses: actions/upload-artifact@v4
-        with:
-          name: allure-report
-          path: build/reports/allure-report
+          path: build/reports/tests/testApi/index.html
           if-no-files-found: warn
 
       - name: List files in build/reports
         run: ls -R build/reports
+
