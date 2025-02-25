@@ -41,5 +41,8 @@ tasks.register('testWeb', Test) {
 
 // Konfigurasi Allure
 allure {
-    reportDir.set(file("build/reports/allure-results"))
+    useJUnit5 {
+        version = "2.21.0"
+    }
 }
+
