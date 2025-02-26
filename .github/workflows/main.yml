@@ -39,6 +39,12 @@ jobs:
       - name: Run Web UI Tests
         run: ./gradlew testWeb
 
+      - name: Debug: List Files in Build Directory
+        run: ls -R build || true
+
+      - name: Wait for Reports
+        run: sleep 10
+
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
         with:
@@ -46,4 +52,3 @@ jobs:
           path: |
             build/reports/tests/test/
             build/cucumber-reports/cucumber.json
-       
