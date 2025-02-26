@@ -39,11 +39,8 @@ jobs:
       - name: Run Web UI Tests
         run: ./gradlew testWeb
 
-      - name: Debug: List Files in Build Directory
+      - name: List Files in Build Directory
         run: ls -R build || true
-
-      - name: Wait for Reports
-        run: sleep 10
 
       - name: Upload Test Reports
         uses: actions/upload-artifact@v4
