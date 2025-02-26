@@ -6,16 +6,25 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.chrome.ChromeOptions;
+
 
 public class LoginSteps {
     WebDriver driver;
 
     @Given("User is on the login page")
     public void userIsOnLoginPage() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.get("https://www.demoblaze.com/");
+        WebDriverManager.chromedriver().setup(); // Download ChromeDriver otomatis
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--headless"); // Jalankan tanpa UI (opsional)
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+
+        driver = new ChromeDriver(options);
+        driver.get("https://www.demoblaze.com");
     }
+
 
     @When("User enters valid username and password")
     public void userEntersValidCredentials() {

@@ -22,12 +22,15 @@ public class GetUserSteps {
     }
 
     @Then("The response should contain user details")
-    public void validateResponse() {
-        response.then().statusCode(200).body("id", notNullValue());
+    public void the_response_should_contain_user_details() {
+        System.out.println("Response Status Code: " + response.getStatusCode());
+        System.out.println("Response Body: " + response.getBody().asString());
 
-        // Cetak response body ke console untuk debugging
-        System.out.println("Response Body:");
-        System.out.println(response.prettyPrint());
+        response.then()
+                .statusCode(200)
+                .body("id", notNullValue()) // Pastikan ID user ada
+                .body("firstName", notNullValue()) // Validasi tambahan
+                .body("lastName", notNullValue());
     }
 
 }
